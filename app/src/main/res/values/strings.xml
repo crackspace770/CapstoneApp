@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">BerBuah</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Search</string>
+    <string name="title_notifications">Favorites</string>
+    <string name="title_setting">Setting</string>
+
+    <string name="description">Description</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="deteksi">Deteksi</string>
+
+    <string name="add">Add</string>
+    <string name="image_story">Image Story</string>
+    <string name="image_placeholder">Image Placeholder</string>
+    <string name="Search">Cari</string>
+    <string name="fruitImg">fruit_description</string>
+
+    <string name="signup">Sign Up</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="message_welcome_page">App where you can post your own picture and share it with other!</string>
+    <string name="title_welcome_page">Welcome to PhotoApp!</string>
+    <string name="title_signup_page">Fill in Your Data!</string>
+    <string name="message_login">Create Your Own Story</string>
+    <string name="title_login">Sudah siap untuk upgrade skill?</string>
+    <string name="backToLogin">Kembali ke halaman login</string>
+    <string name="name">Nama</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="greeting">Hello, %1$s,</string>
+    <string name="password_error">Password should have at least 6 characters</string>
+    <string name="email_error">Email must be in correct format</string>
+    <string name="username">Username</string>
+    <string name="input_name">Name</string>
+    <string name="enter_password">Enter Password</string>
+
+    <string name="image_login">Image Login</string>
+    <string name="image_signup">Image Signup</string>
+
+</resources>
