@@ -11,15 +11,24 @@ data class SearchResponse (
     val incompleteResults: Boolean,
 
     @field:SerializedName("items")
-    val items: List<SearchItem>
+    val items: List<ListFruitItem>
 )
 
-data class SearchItem(
+data class ListFruitItem(
 
-    @field:SerializedName("login")
-    val login: String,
+    @field:SerializedName("nama")
+    val nama: String,
 
-    @field:SerializedName("avatar_url")
-    val avatarUrl: String,
+    @field:SerializedName("deskripsi")
+    val description: String,
+
+    @field:SerializedName("gizi")
+    val gizi: String,
+
+    @field:SerializedName("manfaat")
+    val manfaat: String,
+
+    @field:SerializedName("photo")
+    val photo: String,
 
     )

@@ -1,6 +1,7 @@
 package com.bangkit.berbuah.ui.search
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -15,6 +16,7 @@ import com.bangkit.berbuah.R
 
 import com.bangkit.berbuah.database.Favorite
 import com.bangkit.berbuah.databinding.FragmentSearchBinding
+import com.bangkit.berbuah.ui.login.LoginActivity
 
 import java.util.ArrayList
 
@@ -24,6 +26,8 @@ class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private lateinit var adapter: SearchAdapter
     private val binding get() = _binding!!
+    private lateinit var viewModel: SearchViewModel
+    private lateinit var preferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +35,7 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val mainViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
+        preferences = getSharedPreferences(LoginActivity.SHARED_PREFERENCES, Context.MODE_PRIVATE)
 
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         binding.rvResult.layoutManager = LinearLayoutManager(context)
@@ -50,20 +55,16 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun setSearchData(searchResult: List<SearchItem>) {
-        val listUser: ArrayList<UserProfile> = ArrayList()
-        for (user in searchResult) {
-            val userList = UserProfile(user.name, user.photo, favorite?.isFavorite)
-            listUser.add(userList)
+    private fun setSearchData(searchResult: List<ListFruitItem>) {
+        val listFruit: ArrayList<FruitItem> = ArrayList()
+        for (fruit in searchResult) {
+            val userList = FruitItem(fruit.nama, fruit.photo)
+            listFruit.add(userList)
         }
-        val adapter = SearchAdapter(listUser)
+        val adapter = SearchAdapter(listFruit)
         binding.rvResult.adapter = adapter
         binding.edSearch.setText("")
-        adapter.setOnItemClickCallback(object : SearchAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: UserProfile) {
-                showSelectedUser(data, favorite = Favorite())
-            }
-        })
+
     }
 
     override fun onDestroyView() {
