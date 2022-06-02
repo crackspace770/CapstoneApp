@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.bangkit.berbuah.database.Favorite
 import com.bangkit.berbuah.databinding.FragmentFavoriteBinding
 import com.bangkit.berbuah.ui.detail.DetailActivity
+import com.bangkit.berbuah.ui.search.FruitItem
 
 class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>()  {
 
@@ -16,7 +17,7 @@ class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>(
     private lateinit var onItemClickCallback: OnItemClickCallback
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: UserProfile)
+        fun onItemClicked(data: FruitItem)
     }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
@@ -27,13 +28,13 @@ class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>(
     inner class FavoriteViewHolder(private val binding: FragmentFavoriteBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(favorite: Favorite) {
             if (favorite.isFavorite == true) {
-                binding.tvLogin.text = favorite.login
+                binding.tvName.text = favorite.login
                 Glide.with(itemView.context)
                     .load(favorite.avatar)
                     .into(binding.imgAvatar)
                 itemView.setOnClickListener {
                     val intent = Intent(it.context, DetailActivity::class.java)
-                    val user = UserProfile(favorite.login, favorite.avatar)
+                    val user = FruitItem(favorite.nama, favorite.photo)
                     intent.putExtra(DetailActivity.EXTRA_FAVORITE, favorite)
                     intent.putExtra(DetailActivity.EXTRA_USER, user)
                     it.context.startActivity(intent)

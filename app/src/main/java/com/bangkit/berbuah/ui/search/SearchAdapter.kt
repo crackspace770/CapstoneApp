@@ -10,16 +10,17 @@ import androidx.core.util.Pair
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.berbuah.databinding.FragmentSearchBinding
+import com.bangkit.berbuah.databinding.SearchItemListBinding
 import com.bumptech.glide.Glide
 import com.bangkit.berbuah.ui.detail.DetailActivity
 
 class SearchAdapter: RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
 
-    private var oldStoryItem = emptyList<ListStoryItem>()
+    private var oldStoryItem = emptyList<ListFruitItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = FragmentSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view = SearchItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(view)
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -28,27 +29,23 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = oldStoryItem.size
 
-    fun setData(newStoryItem: List<ListStoryItem>) {
+    fun setData(newStoryItem: List<ListFruitItem>) {
         val diffUtil = SearchDiffUtil(oldStoryItem, newStoryItem)
         val diffResult = DiffUtil.calculateDiff(diffUtil)
         oldStoryItem = newStoryItem
         diffResult.dispatchUpdatesTo(this)
     }
 
-    class ViewHolder(private val binding: FragmentSearchBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: ListStoryItem){
+    class ViewHolder(private val binding: SearchItemListBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind(data: ListFruitItem){
             binding.apply {
-                val dateList = data.createdAt.split("T")
-                val dateListListStoryItem = dateList[0]
                 binding.apply {
-                    tvName.setText(data.name)
-                    tvDescription.setText(data.description)
+                    tvName.setText(data.nama)
                     Glide.with(itemView.context)
-                        .load(data.photoUrl)
+                        .load(data.photo)
                         .centerCrop()
-                        .into(imgAvatar)
-                    tvDate.setText(dateListListStoryItem)
-                    val listListStoryItemDetail = ListStoryItem(data.name,data.description,data.photoUrl)
+                        .into(imgPhoto)
+                    val listListStoryItemDetail = ListFruitItem(data.nama,data.description,data.gizi, data.manfaat,data.photo)
                     Log.d("story:",listListStoryItemDetail.toString())
 
                     itemView.setOnClickListener {
@@ -58,10 +55,9 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
                         val optionsCompat: ActivityOptionsCompat =
                             ActivityOptionsCompat.makeSceneTransitionAnimation(
                                 itemView.context as Activity,
-                                Pair(imgAvatar,"imageListStoryItem"),
+                                Pair(imgPhoto,"imageListStoryItem"),
                                 Pair(tvName,"nameListStoryItem"),
-                                Pair(tvDescription,"nameListStoryItem"),
-                                Pair(tvDate,"dateListStoryItem"),
+
                             )
                         itemView.context.startActivity(intent, optionsCompat.toBundle())
                     }
